@@ -1,13 +1,24 @@
-import { Box, Drawer } from "@mui/material";
+import { AppBar, Box, Drawer, Toolbar } from "@mui/material";
 import SideBar from "../components/SideBar";
 import CSSBaseline from "@mui/material/CssBaseline";
 import { Outlet } from "react-router-dom";
+import NavBar from "../components/NavBar";
 function DashBoard() {
+  //TODO: migrate the tool bar
   const drawerWidth = 70;
   return (
     <>
       <Box sx={{ display: "flex" }}>
         <CSSBaseline />
+        <AppBar
+          position="fixed"
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <NavBar />
+        </AppBar>
         <Box
           component="nav"
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -31,10 +42,11 @@ function DashBoard() {
           component="main"
           sx={{
             flexGrow: 1,
-            p: 3,
+            p: 2,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
           }}
         >
+          <Toolbar />
           <Outlet />
         </Box>
       </Box>

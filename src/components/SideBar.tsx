@@ -20,7 +20,12 @@ function SideBar() {
   return (
     <div>
       <Toolbar sx={{ alignItems: "center", justifyContent: "center" }}>
-        <Box component={"img"} src="/notes.png" width={50} />
+        <Box
+          onClick={() => navigate("/DashBoard")}
+          component={"img"}
+          src="/notes.png"
+          width={50}
+        />
       </Toolbar>
       <Divider />
       <List sx={{ display: "flex", flexDirection: "column", gap: "3rem" }}>

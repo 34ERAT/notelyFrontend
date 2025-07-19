@@ -1,8 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import NoteItem from "../components/NoteItem";
 import { notesList } from "../assets/notesList";
-import { NoteAddTwoTone } from "@mui/icons-material";
-function AllNotes() {
+function Trash() {
   return (
     <Box display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gap={2}>
       {notesList.length == 0 && (
@@ -10,8 +9,11 @@ function AllNotes() {
           variant="h4"
           textTransform={"capitalize"}
           fontFamily={"Indie Flower"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
         >
-          you don't have any notes yet !! <NoteAddTwoTone />
+          You have nothing in trash !!
         </Typography>
       )}
       {notesList.map(({ id, title, synopsis, dateCreated, lastUpdate }) => {
@@ -19,6 +21,7 @@ function AllNotes() {
           <NoteItem
             key={id}
             id={id}
+            isdeleted={true}
             title={title}
             synopsis={synopsis}
             dateCreated={new Date(dateCreated)}
@@ -30,4 +33,4 @@ function AllNotes() {
   );
 }
 
-export default AllNotes;
+export default Trash;

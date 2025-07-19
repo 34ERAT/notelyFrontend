@@ -1,7 +1,6 @@
 import { Paper, Stack, TextField } from "@mui/material";
 import type { CreateNote } from "../types";
 import MDEditor, { codeEdit, codePreview } from "@uiw/react-md-editor";
-import { useRef, useState } from "react";
 
 type Props = {
   value: CreateNote;
@@ -13,8 +12,8 @@ function Editor({ value, onChange }: Props) {
     onChange({ ...value, [name]: inputValue });
   };
   return (
-    <Paper sx={{ padding: 1, borderRadius: 2 }} elevation={5}>
-      <Stack spacing={2}>
+    <Paper sx={{ padding: 1, borderRadius: 2, height: "100%" }} elevation={5}>
+      <Stack spacing={2} height={"100%"}>
         <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
           <TextField
             error={value.synopsis.length === 0}
@@ -35,16 +34,16 @@ function Editor({ value, onChange }: Props) {
             required
           />
         </Stack>
-        <div data-color-mode="light">
+        <div style={{ height: "100%" }} data-color-mode="light">
           <MDEditor
             textareaProps={{
               placeholder: "Please enter Markdown text",
             }}
             preview="edit"
+            height={"100%"}
             hideToolbar={false}
             visibleDragbar={false}
             autoFocusEnd={true}
-            height={"30rem"}
             overflow={true}
             value={value.content}
             extraCommands={[codeEdit, codePreview]}

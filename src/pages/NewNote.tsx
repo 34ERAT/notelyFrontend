@@ -10,11 +10,10 @@ function NewNote() {
     synopsis: "",
   });
   return (
-    <Box>
+    <Box height={"85vh"}>
       <Editor
         value={note}
         onChange={(data) => {
-          console.log(data);
           setNote({ ...data });
         }}
       />
