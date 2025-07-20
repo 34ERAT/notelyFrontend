@@ -7,6 +7,7 @@ import NewNote from "./pages/NewNote";
 import Trash from "./pages/Trash";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import PrivateRoutes from "./components/PrivateRoutes";
 
 function App() {
   return (
@@ -14,19 +15,21 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/DashBoard" element={<DashBoard />}>
-          <Route index element={<AllNotes />} />
-          <Route path="EditNote" element={<div>Edit this note </div>} />
-          <Route path="NewNote" element={<NewNote />} />
-          <Route
-            path="Bookmark"
-            element={
-              <Typography textAlign={"center"} variant="h2">
-                comming soon .....
-              </Typography>
-            }
-          />
-          <Route path="Trash" element={<Trash />} />
+        <Route path="/DashBoard" element={<PrivateRoutes />}>
+          <Route element={<DashBoard />}>
+            <Route index element={<AllNotes />} />
+            <Route path="EditNote" element={<div>Edit this note </div>} />
+            <Route path="NewNote" element={<NewNote />} />
+            <Route
+              path="Bookmark"
+              element={
+                <Typography textAlign={"center"} variant="h2">
+                  comming soon .....
+                </Typography>
+              }
+            />
+            <Route path="Trash" element={<Trash />} />
+          </Route>
         </Route>
       </Routes>
     </Box>

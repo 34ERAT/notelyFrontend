@@ -6,8 +6,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import { hasEmpty, isEmpty } from "../utils";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+type LoginInput = {
+  username: string;
+  // "email":"{{Email}}",
+  password: string;
+};
 function Login() {
+  const [input, setInput] = useState<LoginInput>({
+    username: "",
+    password: "",
+  });
+  const navigate = useNavigate();
   return (
     <Box
       height={"100%"}
@@ -26,10 +38,34 @@ function Login() {
             Login
           </Typography>
           <Stack direction={"column"} spacing={2}>
-            <TextField label="username or password" required />
-            <TextField label="password" required />
+            <TextField
+              value={input.username}
+              error={isEmpty(input.username)}
+              type="text"
+              label="username or email"
+              onChange={({ target: { value } }) => {
+                setInput({ ...input, username: value });
+              }}
+              required
+            />
+            <TextField
+              value={input.password}
+              error={isEmpty(input.password)}
+              type="password"
+              label="password"
+              onChange={({ target: { value } }) => {
+                setInput({ ...input, password: value });
+              }}
+              required
+            />
           </Stack>
-          <Button variant="contained">SignUP</Button>
+          <Button
+            onClick={() => navigate("/Dashboard")}
+            disabled={hasEmpty(Object.values(input))}
+            variant="contained"
+          >
+            login
+          </Button>
         </Stack>
       </Paper>
     </Box>
