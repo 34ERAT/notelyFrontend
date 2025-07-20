@@ -5,11 +5,15 @@ import DashBoard from "./pages/DashBoard";
 import AllNotes from "./pages/AllNotes";
 import NewNote from "./pages/NewNote";
 import Trash from "./pages/Trash";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
     <Box height={"100vh"}>
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/DashBoard" element={<DashBoard />}>
           <Route index element={<AllNotes />} />
           <Route path="EditNote" element={<div>Edit this note </div>} />
