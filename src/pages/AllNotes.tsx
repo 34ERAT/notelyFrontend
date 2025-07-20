@@ -1,11 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import NoteItem from "../components/NoteItem";
-import { notesList } from "../assets/notesList";
 import { NoteAddTwoTone } from "@mui/icons-material";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "../config/axiosInstance";
+import type { NoteListItem } from "../types";
 function AllNotes() {
+  const { data } = useQuery({
+    queryKey: ["getallnotes"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get<NoteListItem[]>("/notes");
+      return data;
+    },
+  });
   return (
     <Box display={"flex"} justifyContent={"center"} flexWrap={"wrap"} gap={2}>
-      {notesList.length == 0 && (
+      {data?.length == 0 && (
         <Typography
           variant="h4"
           textTransform={"capitalize"}
@@ -14,7 +23,7 @@ function AllNotes() {
           you don't have any notes yet !! <NoteAddTwoTone />
         </Typography>
       )}
-      {notesList.map(({ id, title, synopsis, dateCreated, lastUpdate }) => {
+      {data?.map(({ id, title, synopsis, dateCreated, lastUpdate }) => {
         return (
           <NoteItem
             key={id}

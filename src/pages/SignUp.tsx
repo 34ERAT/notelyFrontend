@@ -5,10 +5,14 @@ import {
   Typography,
   TextField,
   Button,
+  Alert,
 } from "@mui/material";
 import { useState } from "react";
 import { hasEmpty, isEmpty } from "../utils";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "../config/axiosInstance";
+import { AxiosError } from "axios";
 
 type RegisterUser = {
   firstName: string;
@@ -27,7 +31,23 @@ function SignUp() {
     password: "",
     confirmPassword: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { isError, isPending, mutate } = useMutation({
+    mutationKey: ["signupMutation"],
+    mutationFn: async (user: RegisterUser) => {
+      const { data } = await axiosInstance.post("/auth/register", user);
+      return data;
+    },
+    onSuccess: () => {
+      navigate("/login");
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        setErrorMessage(error?.response?.data?.message);
+      }
+    },
+  });
   return (
     <Box
       height={"100%"}
@@ -36,6 +56,7 @@ function SignUp() {
       alignItems={"center"}
     >
       <Paper elevation={5} sx={{ p: 2, width: "20rem" }}>
+        {isError && <Alert severity={"error"}>{errorMessage}</Alert>}
         <Stack spacing={2}>
           <Typography
             variant="h4"
@@ -109,7 +130,8 @@ function SignUp() {
               hasEmpty(Object.values(input)) ||
               input.confirmPassword != input.password
             }
-            onClick={() => navigate("/login")}
+            loading={isPending}
+            onClick={() => mutate(input)}
             variant="contained"
           >
             Create account
