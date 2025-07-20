@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Paper,
@@ -9,17 +10,31 @@ import {
 import { hasEmpty, isEmpty } from "../utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "../config/axiosInstance";
+import { useloginStore } from "../store";
 type LoginInput = {
-  username: string;
-  // "email":"{{Email}}",
+  userName: string;
   password: string;
 };
 function Login() {
+  const navigate = useNavigate();
+  const { setAccessToken } = useloginStore();
   const [input, setInput] = useState<LoginInput>({
-    username: "",
+    userName: "",
     password: "",
   });
-  const navigate = useNavigate();
+  const { mutate, isPending, isError } = useMutation({
+    mutationKey: ["loginMutation"],
+    mutationFn: async (login: LoginInput) => {
+      const { data } = await axiosInstance.post("/auth/login", login);
+      return data as { accessToken: string };
+    },
+    onSuccess: (data) => {
+      setAccessToken(data.accessToken);
+      navigate("/Dashboard");
+    },
+  });
   return (
     <Box
       height={"100%"}
@@ -28,6 +43,9 @@ function Login() {
       alignItems={"center"}
     >
       <Paper elevation={5} sx={{ p: 2, width: "20rem" }}>
+        {isError && (
+          <Alert severity="error"> invalid username or password</Alert>
+        )}
         <Stack spacing={3}>
           <Typography
             variant="h4"
@@ -39,12 +57,12 @@ function Login() {
           </Typography>
           <Stack direction={"column"} spacing={2}>
             <TextField
-              value={input.username}
-              error={isEmpty(input.username)}
+              value={input.userName}
+              error={isEmpty(input.userName)}
               type="text"
               label="username or email"
               onChange={({ target: { value } }) => {
-                setInput({ ...input, username: value });
+                setInput({ ...input, userName: value });
               }}
               required
             />
@@ -60,7 +78,8 @@ function Login() {
             />
           </Stack>
           <Button
-            onClick={() => navigate("/Dashboard")}
+            onClick={() => mutate(input)}
+            loading={isPending}
             disabled={hasEmpty(Object.values(input))}
             variant="contained"
           >
