@@ -6,7 +6,7 @@ import axiosInstance from "../config/axiosInstance";
 import type { NoteListItem } from "../types";
 function AllNotes() {
   const { data } = useQuery({
-    queryKey: ["getallnotes"],
+    queryKey: ["getAllNotes"],
     queryFn: async () => {
       const { data } = await axiosInstance.get<NoteListItem[]>("/notes");
       return data;

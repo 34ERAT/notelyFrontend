@@ -1,13 +1,8 @@
 import { Bookmark, Delete, Restore } from "@mui/icons-material";
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Card, CardActionArea, IconButton, Tooltip } from "@mui/material";
+import NoteItemContent from "./NoteItemContent";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from "../config/axiosInstance";
 
 type Props = {
   id: string;
@@ -25,6 +20,24 @@ function NoteItem({
   dateCreated,
   lastUpdate,
 }: Props) {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationKey: ["deleteNote"],
+    mutationFn: async (id: string) => {
+      const { data } = await axiosInstance.delete(`/notes/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["getAllNotes"],
+        refetchType: "active",
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   return (
     <Card
       component={"div"}
@@ -52,55 +65,12 @@ function NoteItem({
           },
         }}
       >
-        <CardContent
-          sx={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            fontFamily: "Indie Flower",
-          }}
-        >
-          <Typography
-            gutterBottom
-            fontFamily={"inherit"}
-            variant="h4"
-            fontWeight={900}
-          >
-            {title}
-          </Typography>
-          <Typography gutterBottom variant="h6" fontFamily={"inherit"}>
-            {synopsis}
-          </Typography>
-          <Stack direction={"row"} justifyContent={"space-between"}>
-            <Stack>
-              <Typography
-                fontFamily={"inherit"}
-                variant="subtitle1"
-                textTransform={"capitalize"}
-                gutterBottom
-              >
-                created at
-              </Typography>
-              <Typography color="secondary" fontWeight={900} variant="body2">
-                {dateCreated.toDateString()}
-              </Typography>
-            </Stack>
-            <Stack>
-              <Typography
-                fontFamily={"inherit"}
-                variant="subtitle1"
-                textTransform={"capitalize"}
-                gutterBottom
-              >
-                last Update
-              </Typography>
-              <Typography color="info" fontWeight={900} variant="body2">
-                {lastUpdate.toDateString()}
-              </Typography>
-            </Stack>
-          </Stack>
-        </CardContent>
+        <NoteItemContent
+          title={title}
+          synopsis={synopsis}
+          lastUpdate={lastUpdate}
+          dateCreated={dateCreated}
+        />
       </CardActionArea>
       {isdeleted ? (
         <IconButton
@@ -116,6 +86,7 @@ function NoteItem({
         <IconButton
           className="more"
           color="warning"
+          onClick={() => mutate(id)}
           sx={{ position: "absolute", display: "none", top: 0, right: 0 }}
         >
           <Tooltip title="delete">
