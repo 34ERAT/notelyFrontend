@@ -20,22 +20,31 @@ function NoteItem({
   dateCreated,
   lastUpdate,
 }: Props) {
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: ["getAllNotes"] });
+    queryClient.invalidateQueries({ queryKey: ["getTrash"] });
+  };
+
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate: mutateDeleteNote } = useMutation({
     mutationKey: ["deleteNote"],
     mutationFn: async (id: string) => {
-      const { data } = await axiosInstance.delete(`/notes/${id}`);
+      const { data } = await axiosInstance.delete<{ message: string }>(
+        `/notes/${id}`,
+      );
       return data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["getAllNotes"],
-        refetchType: "active",
-      });
+    onSuccess: onSuccess,
+  });
+  const { mutate: mutateRestoreNote } = useMutation({
+    mutationKey: ["restoreNote"],
+    mutationFn: async (id: string) => {
+      const { data } = await axiosInstance.patch<{ message: string }>(
+        `/notes/restore/${id}`,
+      );
+      return data;
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onSuccess: onSuccess,
   });
 
   return (
@@ -76,6 +85,7 @@ function NoteItem({
         <IconButton
           className="more"
           color="warning"
+          onClick={() => mutateRestoreNote(id)}
           sx={{ position: "absolute", display: "none", top: 0, right: 0 }}
         >
           <Tooltip title="Restore">
@@ -86,7 +96,7 @@ function NoteItem({
         <IconButton
           className="more"
           color="warning"
-          onClick={() => mutate(id)}
+          onClick={() => mutateDeleteNote(id)}
           sx={{ position: "absolute", display: "none", top: 0, right: 0 }}
         >
           <Tooltip title="delete">
