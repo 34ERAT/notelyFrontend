@@ -6,6 +6,9 @@ import { useProfileStore } from "../store";
 function Profile() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const {
     profile: { email, avatar, firstName, lastName },
   } = useProfileStore();
@@ -30,7 +33,12 @@ function Profile() {
           {`${firstName[0] + lastName[0]}`.toUpperCase()}
         </Avatar>
       </IconButton>
-      <ProfileMenu anchorEl={anchorEl as HTMLElement} open={open} />
+      <ProfileMenu
+        anchorEl={anchorEl as HTMLElement}
+        open={open}
+        onClick={handleClose}
+        onClose={handleClose}
+      />
     </Stack>
   );
 }

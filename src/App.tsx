@@ -8,6 +8,7 @@ import Trash from "./pages/Trash";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import PrivateRoutes from "./components/PrivateRoutes";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               }
             />
             <Route path="Trash" element={<Trash />} />
+            <Route path="profile" element={<EditProfile />} />
           </Route>
         </Route>
       </Routes>
