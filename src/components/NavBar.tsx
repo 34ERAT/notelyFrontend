@@ -12,9 +12,6 @@ function NavBar() {
       }}
     >
       <Logo />
-      <Typography display={{ xs: "none" }} variant="h4" fontWeight={800}>
-        Page Title
-      </Typography>
       <SearchNote />
       <Profile />
     </Toolbar>

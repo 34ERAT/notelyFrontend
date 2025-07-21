@@ -1,11 +1,14 @@
 import { Avatar, IconButton, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import ProfileMenu from "./ProfileMenu";
+import { useProfileStore } from "../store";
 
 function Profile() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
+  const {
+    profile: { email, avatar, firstName, lastName },
+  } = useProfileStore();
   return (
     <Stack
       direction={"row"}
@@ -20,10 +23,12 @@ function Profile() {
         fontSize={"1.2rem"}
         fontWeight={400}
       >
-        helloe jolly
+        {email}
       </Typography>
       <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
-        <Avatar>TM</Avatar>
+        <Avatar src={avatar}>
+          {`${firstName[0] + lastName[0]}`.toUpperCase()}
+        </Avatar>
       </IconButton>
       <ProfileMenu anchorEl={anchorEl as HTMLElement} open={open} />
     </Stack>

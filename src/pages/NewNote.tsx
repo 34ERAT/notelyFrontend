@@ -8,13 +8,14 @@ import { hasEmpty } from "../utils";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosInstance";
 import ActionButton from "../components/ActionButton";
-
+//TODO: implement auto  sync
 function NewNote() {
-  const [note, setNote] = useState<CreateNote>({
+  const emptyNote: CreateNote = {
     title: "",
     content: "",
     synopsis: "",
-  });
+  };
+  const [note, setNote] = useState<CreateNote>(emptyNote);
   const { mutate, isPending, isSuccess } = useMutation({
     mutationKey: ["newNote"],
     mutationFn: async (note: CreateNote) => {
@@ -36,7 +37,10 @@ function NewNote() {
           isSuccess={isSuccess}
           successIcon={<CheckIcon />}
           icon={<SaveIcon />}
-          onClick={() => mutate(note)}
+          onClick={() => {
+            mutate(note);
+            setNote(emptyNote);
+          }}
           disabled={hasEmpty(Object.values(note))}
         />
       </Box>
