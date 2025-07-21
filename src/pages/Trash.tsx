@@ -8,7 +8,6 @@ function Trash() {
     queryKey: ["getTrash"],
     queryFn: async () => {
       const { data } = await axiosInstance.get<NoteListItem[]>("/notes/trash");
-      console.log(data);
       return data;
     },
   });
