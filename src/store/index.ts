@@ -25,3 +25,11 @@ export const useProfileStore = create<ProfileState>((set) => ({
   profile: initalProfile,
   setProfile: (profile: UserProfile) => set({ profile: { ...profile } }),
 }));
+type useSelectedNote = {
+  noteId: string;
+  setNoteId: (id: string) => void;
+};
+export const useSelectedNote = create<useSelectedNote>((set) => ({
+  noteId: "",
+  setNoteId: (id: string) => set({ noteId: id }),
+}));

@@ -3,6 +3,7 @@ import { Card, CardActionArea, IconButton, Tooltip } from "@mui/material";
 import NoteItemContent from "./NoteItemContent";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosInstance";
+import { useSelectedNote } from "../store";
 
 type Props = {
   id: string;
@@ -20,6 +21,7 @@ function NoteItem({
   dateCreated,
   lastUpdate,
 }: Props) {
+  const { noteId, setNoteId } = useSelectedNote();
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["getAllNotes"] });
     queryClient.invalidateQueries({ queryKey: ["getTrash"] });
@@ -61,9 +63,7 @@ function NoteItem({
       }}
     >
       <CardActionArea
-        data-active={
-          "c4f8308d-6471-4d78-bed9-5c71d30be485" == id ? "" : undefined
-        }
+        data-active={noteId == id ? "" : undefined}
         sx={{
           height: "100%",
           "&[data-active]": {
@@ -73,6 +73,7 @@ function NoteItem({
             },
           },
         }}
+        onClick={() => setNoteId(id)}
       >
         <NoteItemContent
           title={title}

@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import PrivateRoutes from "./components/PrivateRoutes";
 import EditProfile from "./pages/EditProfile";
+import EditNote from "./pages/EditNote";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/DashBoard" element={<PrivateRoutes />}>
           <Route element={<DashBoard />}>
             <Route index element={<AllNotes />} />
-            <Route path="EditNote" element={<div>Edit this note </div>} />
+            <Route path="EditNote" element={<EditNote />} />
             <Route path="NewNote" element={<NewNote />} />
             <Route
               path="Bookmark"

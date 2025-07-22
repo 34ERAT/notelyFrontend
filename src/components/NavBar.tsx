@@ -1,8 +1,12 @@
-import { Toolbar, Typography } from "@mui/material";
+import { Box, IconButton, Toolbar } from "@mui/material";
 import SearchNote from "./SearchNote";
 import Profile from "./Profile";
 import Logo from "./Logo";
-function NavBar() {
+import { Menu } from "@mui/icons-material";
+type Props = {
+  toggleDrawer: () => void;
+};
+function NavBar({ toggleDrawer }: Props) {
   return (
     <Toolbar
       sx={{
@@ -11,7 +15,15 @@ function NavBar() {
         justifyContent: "space-between",
       }}
     >
-      <Logo />
+      <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+        <Logo />
+      </Box>
+      <IconButton
+        sx={{ display: { xs: "flex", sm: "none" } }}
+        onClick={toggleDrawer}
+      >
+        <Menu fontSize="large" />
+      </IconButton>
       <SearchNote />
       <Profile />
     </Toolbar>

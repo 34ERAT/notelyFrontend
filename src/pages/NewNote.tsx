@@ -26,6 +26,7 @@ function NewNote() {
   return (
     <Box height={"85vh"} position={"relative"}>
       <Editor
+        preview="edit"
         value={note}
         onChange={(data) => {
           setNote({ ...data });

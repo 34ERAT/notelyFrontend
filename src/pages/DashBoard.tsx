@@ -3,9 +3,11 @@ import SideBar from "../components/SideBar";
 import CSSBaseline from "@mui/material/CssBaseline";
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import { useState } from "react";
 function DashBoard() {
   //TODO: migrate the tool bar
   const drawerWidth = 70;
+  const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -17,7 +19,7 @@ function DashBoard() {
             ml: { sm: `${drawerWidth}px` },
           }}
         >
-          <NavBar />
+          <NavBar toggleDrawer={() => setOpenDrawer(true)} />
         </AppBar>
         <Box
           component="nav"
@@ -34,6 +36,21 @@ function DashBoard() {
               },
             }}
             open
+          >
+            <SideBar />
+          </Drawer>
+
+          <Drawer
+            variant="temporary"
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+            open={openDrawer}
+            onClose={() => setOpenDrawer(false)}
           >
             <SideBar />
           </Drawer>
