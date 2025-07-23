@@ -2,6 +2,7 @@ import { Box, Toolbar } from "@mui/material";
 import HeroSection from "../components/HeroSection";
 import AboutUsSection from "../components/AboutUsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
+import FooterSection from "../components/FooterSection";
 
 function LandingPage() {
   return (
@@ -10,6 +11,7 @@ function LandingPage() {
       <HeroSection />
       <AboutUsSection />
       <TestimonialsSection />
+      <FooterSection />
     </Box>
   );
 }

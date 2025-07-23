@@ -3,7 +3,7 @@ import TestimonalCard from "./TestimonalCard";
 
 function TestimonialsSection() {
   return (
-    <Box height={"100vh"}>
+    <Box height={"80vh"}>
       <Typography
         variant="h2"
         textTransform={"capitalize"}
