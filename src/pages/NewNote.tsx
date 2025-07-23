@@ -16,7 +16,8 @@ function NewNote() {
     synopsis: "",
   };
   const [note, setNote] = useState<CreateNote>(emptyNote);
-  const { mutate, isPending, isSuccess } = useMutation({
+  const [success, setSuccess] = useState(false);
+  const { mutate, isPending } = useMutation({
     mutationKey: ["newNote"],
     mutationFn: async (note: CreateNote) => {
       const { data } = await axiosInstance.post("/notes", note);
@@ -35,12 +36,13 @@ function NewNote() {
       <Box position={"absolute"} bottom={20} right={10}>
         <ActionButton
           isloading={isPending}
-          isSuccess={isSuccess}
+          isSuccess={success}
           successIcon={<CheckIcon />}
           icon={<SaveIcon />}
           onClick={() => {
             mutate(note);
             setNote(emptyNote);
+            setTimeout(() => setSuccess(false), 3000);
           }}
           disabled={hasEmpty(Object.values(note))}
         />
