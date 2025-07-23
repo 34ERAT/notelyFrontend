@@ -55,7 +55,7 @@ function SignUp() {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Paper elevation={5} sx={{ p: 2, width: "20rem" }}>
+      <Paper elevation={5} sx={{ p: 2, width: "26rem" }}>
         {isError && <Alert severity={"error"}>{errorMessage}</Alert>}
         <Stack spacing={2}>
           <Typography
@@ -67,24 +67,28 @@ function SignUp() {
             register
           </Typography>
           <Stack spacing={1}>
-            <TextField
-              value={input.firstName}
-              error={isEmpty(input.firstName)}
-              onChange={({ target: { value } }) =>
-                setInput({ ...input, firstName: value })
-              }
-              label="first Name"
-              required
-            />
-            <TextField
-              value={input.lastName}
-              error={isEmpty(input.lastName)}
-              onChange={({ target: { value } }) =>
-                setInput({ ...input, lastName: value })
-              }
-              label="last Name"
-              required
-            />
+            <Stack direction={"row"} spacing={1}>
+              <TextField
+                value={input.firstName}
+                error={isEmpty(input.firstName)}
+                onChange={({ target: { value } }) =>
+                  setInput({ ...input, firstName: value })
+                }
+                label="first Name"
+                required
+                fullWidth
+              />
+              <TextField
+                value={input.lastName}
+                error={isEmpty(input.lastName)}
+                onChange={({ target: { value } }) =>
+                  setInput({ ...input, lastName: value })
+                }
+                label="last Name"
+                required
+                fullWidth
+              />
+            </Stack>
             <TextField
               value={input.username}
               error={isEmpty(input.username)}
@@ -137,6 +141,10 @@ function SignUp() {
             Create account
           </Button>
         </Stack>
+        click to
+        <Button onClick={() => navigate("/login")} size="small" variant="text">
+          sign in
+        </Button>
       </Paper>
     </Box>
   );

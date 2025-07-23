@@ -86,6 +86,10 @@ function Login() {
             login
           </Button>
         </Stack>
+        click to
+        <Button onClick={() => navigate("/signup")} size="small" variant="text">
+          sign up
+        </Button>
       </Paper>
     </Box>
   );
