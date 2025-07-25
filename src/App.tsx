@@ -25,7 +25,7 @@ function App() {
         <Route path="/DashBoard" element={<PrivateRoutes />}>
           <Route element={<DashBoard />}>
             <Route index element={<AllNotes />} />
-            <Route path="EditNote" element={<EditNote />} />
+            <Route path="EditNote/:noteId" element={<EditNote />} />
             <Route path="NewNote" element={<NewNote />} />
             <Route
               path="Bookmark"

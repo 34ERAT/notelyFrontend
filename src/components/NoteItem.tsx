@@ -1,9 +1,17 @@
-import { Bookmark, Delete, Restore } from "@mui/icons-material";
-import { Card, CardActionArea, IconButton, Tooltip } from "@mui/material";
+import { Bookmark } from "@mui/icons-material";
+import {
+  Card,
+  CardActionArea,
+  IconButton,
+  Stack,
+  Tooltip,
+} from "@mui/material";
 import NoteItemContent from "./NoteItemContent";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axiosInstance from "../config/axiosInstance";
+import { useQueryClient } from "@tanstack/react-query";
 import { useSelectedNote } from "../store";
+import CardRestoreAction from "./CardActions/CardRestoreAction";
+import CardDeleteAction from "./CardActions/CardDeleteAction";
+import CardEditAction from "./CardActions/CardEditAction";
 
 type Props = {
   id: string;
@@ -28,27 +36,6 @@ function NoteItem({
   };
 
   const queryClient = useQueryClient();
-  const { mutate: mutateDeleteNote } = useMutation({
-    mutationKey: ["deleteNote"],
-    mutationFn: async (id: string) => {
-      const { data } = await axiosInstance.delete<{ message: string }>(
-        `/notes/${id}`,
-      );
-      return data;
-    },
-    onSuccess: onSuccess,
-  });
-  const { mutate: mutateRestoreNote } = useMutation({
-    mutationKey: ["restoreNote"],
-    mutationFn: async (id: string) => {
-      const { data } = await axiosInstance.patch<{ message: string }>(
-        `/notes/restore/${id}`,
-      );
-      return data;
-    },
-    onSuccess: onSuccess,
-  });
-
   return (
     <Card
       component={"div"}
@@ -83,38 +70,23 @@ function NoteItem({
         />
       </CardActionArea>
       {isdeleted ? (
-        <IconButton
-          className="more"
-          color="warning"
-          onClick={() => mutateRestoreNote(id)}
-          sx={{ position: "absolute", display: "none", top: 0, right: 0 }}
-        >
-          <Tooltip title="Restore">
-            <Restore />
-          </Tooltip>
-        </IconButton>
+        <CardRestoreAction id={id} onSuccess={onSuccess} />
       ) : (
-        <IconButton
-          className="more"
-          color="warning"
-          onClick={() => mutateDeleteNote(id)}
-          sx={{ position: "absolute", display: "none", top: 0, right: 0 }}
-        >
-          <Tooltip title="delete">
-            <Delete />
-          </Tooltip>
-        </IconButton>
+        <CardDeleteAction id={id} onSuccess={onSuccess} />
       )}
       {!isdeleted && (
-        <IconButton
-          className="more"
-          color="secondary"
-          sx={{ position: "absolute", display: "none", top: 40, right: 0 }}
-        >
-          <Tooltip title="Bookmark">
-            <Bookmark />
-          </Tooltip>
-        </IconButton>
+        <Stack>
+          <CardEditAction id={id} />
+          <IconButton
+            className="more"
+            color="secondary"
+            sx={{ position: "absolute", display: "none", top: 40, right: 0 }}
+          >
+            <Tooltip title="Bookmark">
+              <Bookmark />
+            </Tooltip>
+          </IconButton>
+        </Stack>
       )}
     </Card>
   );

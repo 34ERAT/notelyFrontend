@@ -4,5 +4,9 @@
   box-sizing: border-box;
 }
 html {
+  /* font-size: 62.5%; */
   font-family: "Playfair Display", serif;
+}
+body {
+  font-size: 1.3rem;
 }

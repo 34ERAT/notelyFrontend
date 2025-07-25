@@ -1,14 +1,14 @@
-import { Paper, Stack, TextField } from "@mui/material";
+import { Box, Paper, Stack, TextField } from "@mui/material";
 import type { CreateNote } from "../types";
-import MDEditor, { codeEdit, codePreview } from "@uiw/react-md-editor";
 import { isEmpty } from "../utils";
+import TipTap from "./TipTap";
 
 type Props = {
   value: CreateNote;
   onChange: (note: CreateNote) => void;
   preview: "edit" | "preview";
 };
-function Editor({ preview, value, onChange }: Props) {
+function Editor({ value, onChange }: Props) {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue, name } = e.target;
     onChange({ ...value, [name]: inputValue });
@@ -39,22 +39,12 @@ function Editor({ preview, value, onChange }: Props) {
             required
           />
         </Stack>
-        <div style={{ height: "100%" }} data-color-mode="light">
-          <MDEditor
-            textareaProps={{
-              placeholder: "Please enter Markdown text",
-            }}
-            preview={preview}
-            height={"100%"}
-            hideToolbar={false}
-            visibleDragbar={false}
-            autoFocusEnd={true}
-            overflow={true}
-            value={value.content}
-            extraCommands={[codeEdit, codePreview]}
+        <Box flex={1} width={"100%"} height={"100%"} overflow={"scroll"}>
+          <TipTap
+            content={value.content}
             onChange={(data) => onChange({ ...value, content: data || "" })}
           />
-        </div>
+        </Box>
       </Stack>
     </Paper>
   );

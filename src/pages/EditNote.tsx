@@ -7,7 +7,7 @@ import type { CreateNote } from "../types";
 import Editor from "../components/Editor";
 import { Check, Edit } from "@mui/icons-material";
 import axiosInstance from "../config/axiosInstance";
-import { useSelectedNote } from "../store";
+import { useParams } from "react-router-dom";
 
 type ModifiedNote = CreateNote & {
   content: string;
@@ -18,7 +18,7 @@ function EditNote() {
     content: "",
     synopsis: "",
   };
-  const { noteId } = useSelectedNote();
+  const { noteId } = useParams();
   const [note, setNote] = useState<CreateNote>(emptyNote);
   const { isSuccess } = useQuery({
     queryKey: ["fetchNote"],

@@ -1,3 +1,7 @@
+import TurndownService from "turndown";
+
+import { marked } from "marked";
+
 export function hasEmpty(values: string[]) {
   for (const item of values) {
     if (item.length == 0) return true;
@@ -6,4 +10,12 @@ export function hasEmpty(values: string[]) {
 }
 export function isEmpty(values: string) {
   return values.length == 0 ? true : false;
+}
+export function toMarkDown(value: string) {
+  const turndownService = new TurndownService();
+
+  return turndownService.turndown(value);
+}
+export function toHtml(value: string) {
+  return marked(value);
 }

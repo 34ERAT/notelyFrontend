@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { CreateNote } from "../types";
 import CheckIcon from "@mui/icons-material/Check";
 import SaveIcon from "@mui/icons-material/Save";
-import { hasEmpty } from "../utils";
+import { hasEmpty, toMarkDown } from "../utils";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosInstance";
 import ActionButton from "../components/ActionButton";
@@ -20,7 +20,10 @@ function NewNote() {
   const { mutate, isPending } = useMutation({
     mutationKey: ["newNote"],
     mutationFn: async (note: CreateNote) => {
-      const { data } = await axiosInstance.post("/notes", note);
+      const { data } = await axiosInstance.post("/notes", {
+        ...note,
+        content: toMarkDown(note.content),
+      });
       return data;
     },
   });
