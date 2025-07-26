@@ -1,52 +1,26 @@
-import { Box, Paper, Stack, TextField } from "@mui/material";
-import type { CreateNote } from "../types";
-import { isEmpty } from "../utils";
-import TipTap from "./TipTap";
-
-type Props = {
-  value: CreateNote;
-  onChange: (note: CreateNote) => void;
-  preview: "edit" | "preview";
-};
-function Editor({ value, onChange }: Props) {
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value: inputValue, name } = e.target;
-    onChange({ ...value, [name]: inputValue });
-  };
+import { useEditorStore } from "../store";
+import { EditorProvider } from "@tiptap/react";
+import "./TipTap.scss";
+import StarterKit from "@tiptap/starter-kit";
+import EditorToolbar from "./Editor/EditorToolbar";
+import { toHtml } from "../utils";
+import SaveNoteBtn from "./Editor/SaveNoteBtn";
+import EditNoteBtn from "./Editor/EditNoteBtn";
+const extensions = [StarterKit];
+function Editor({ mode }: { mode: "edit" | "new" }) {
+  const { note, setNote } = useEditorStore();
   return (
-    <Paper sx={{ padding: 1, borderRadius: 2, height: "100%" }} elevation={5}>
-      <Stack spacing={2} height={"100%"}>
-        <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
-          <TextField
-            error={isEmpty(value.title)}
-            value={value.title}
-            onChange={handleOnChange}
-            label="title"
-            name="title"
-            size="small"
-            fullWidth
-            required
-            slotProps={{ inputLabel: { shrink: !isEmpty(value.title) } }}
-          />
-          <TextField
-            error={isEmpty(value.synopsis)}
-            onChange={handleOnChange}
-            value={value.synopsis}
-            size="small"
-            label="synopsis"
-            name="synopsis"
-            fullWidth
-            required
-          />
-        </Stack>
-        <Box flex={1} width={"100%"} height={"100%"} overflow={"scroll"}>
-          <TipTap
-            content={value.content}
-            onChange={(data) => onChange({ ...value, content: data || "" })}
-          />
-        </Box>
-      </Stack>
-    </Paper>
+    <EditorProvider
+      extensions={extensions}
+      content={toHtml(note.content)}
+      slotBefore={<EditorToolbar />}
+      onUpdate={({ editor }) => {
+        setNote({ ...note, content: editor.getHTML() });
+      }}
+      immediatelyRender={false}
+    >
+      {mode == "new" ? <SaveNoteBtn /> : <EditNoteBtn />}
+    </EditorProvider>
   );
 }
 

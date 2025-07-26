@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import NoteItemContent from "./NoteItemContent";
 import { useQueryClient } from "@tanstack/react-query";
-import { useSelectedNote } from "../store";
 import CardRestoreAction from "./CardActions/CardRestoreAction";
 import CardDeleteAction from "./CardActions/CardDeleteAction";
 import CardEditAction from "./CardActions/CardEditAction";
@@ -29,7 +28,6 @@ function NoteItem({
   dateCreated,
   lastUpdate,
 }: Props) {
-  const { noteId, setNoteId } = useSelectedNote();
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["getAllNotes"] });
     queryClient.invalidateQueries({ queryKey: ["getTrash"] });
@@ -50,7 +48,6 @@ function NoteItem({
       }}
     >
       <CardActionArea
-        data-active={noteId == id ? "" : undefined}
         sx={{
           height: "100%",
           "&[data-active]": {
@@ -60,7 +57,6 @@ function NoteItem({
             },
           },
         }}
-        onClick={() => setNoteId(id)}
       >
         <NoteItemContent
           title={title}

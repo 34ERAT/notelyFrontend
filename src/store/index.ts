@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { UserProfile } from "../types";
+import type { CreateNote, UserProfile } from "../types";
 type LoginState = {
   accessToken: string;
   setAccessToken: (accessToken: string) => void;
@@ -26,10 +26,14 @@ export const useProfileStore = create<ProfileState>((set) => ({
   setProfile: (profile: UserProfile) => set({ profile: { ...profile } }),
 }));
 type useSelectedNote = {
-  noteId: string;
-  setNoteId: (id: string) => void;
+  note: CreateNote;
+  setNote: (note: CreateNote) => void;
+  reSet: () => void;
 };
-export const useSelectedNote = create<useSelectedNote>((set) => ({
-  noteId: "",
-  setNoteId: (id: string) => set({ noteId: id }),
+export const useEditorStore = create<useSelectedNote>((set) => ({
+  note: { title: "", synopsis: "", content: "" },
+  setNote: (note: CreateNote) => set({ note }),
+  reSet: () => {
+    set({ note: { title: "", content: "", synopsis: "" } });
+  },
 }));
