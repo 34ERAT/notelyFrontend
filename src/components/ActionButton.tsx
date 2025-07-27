@@ -9,7 +9,7 @@ type Props = {
   icon: ReactNode;
   onClick: () => void;
   disabled: boolean;
-  size: "small" | "medium";
+  size?: "small" | "medium";
 };
 function ActionButton({
   isloading,
