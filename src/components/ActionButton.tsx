@@ -9,6 +9,7 @@ type Props = {
   icon: ReactNode;
   onClick: () => void;
   disabled: boolean;
+  size: "small" | "medium";
 };
 function ActionButton({
   isloading,
@@ -16,6 +17,7 @@ function ActionButton({
   isSuccess,
   icon,
   onClick,
+  size,
   disabled,
 }: Props) {
   const buttonSx = {
@@ -28,12 +30,18 @@ function ActionButton({
   };
   return (
     <Box sx={{ position: "relative" }}>
-      <Fab sx={buttonSx} onClick={onClick} color="primary" disabled={disabled}>
+      <Fab
+        sx={buttonSx}
+        size={size || "small"}
+        onClick={onClick}
+        color="primary"
+        disabled={disabled}
+      >
         {isSuccess ? successIcon : icon}
       </Fab>
       {isloading && (
         <CircularProgress
-          size={68}
+          size={size == "small" ? 52 : 68}
           sx={{
             color: green[500],
             position: "absolute",
