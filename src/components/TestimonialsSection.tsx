@@ -3,7 +3,7 @@ import TestimonalCard from "./TestimonalCard";
 
 function TestimonialsSection() {
   return (
-    <Box height={"80vh"}>
+    <Box minHeight={"80vh"}>
       <Typography
         variant="h2"
         textTransform={"capitalize"}
@@ -19,7 +19,7 @@ function TestimonialsSection() {
         direction={"row"}
         alignItems="center"
         flexWrap={"wrap"}
-        spacing={4}
+        gap={3}
       >
         <TestimonalCard />
         <TestimonalCard />

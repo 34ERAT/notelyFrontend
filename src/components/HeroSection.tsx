@@ -29,10 +29,15 @@ function HeroSection() {
       >
         <Typography
           fontFamily={"inherit"}
-          variant="h1"
+          // variant="h1"
           fontWeight={900}
           color="inhert"
-          letterSpacing={3}
+          letterSpacing={{ xs: 1, md: 3 }}
+          textAlign={"center"}
+          sx={{
+            variant: { xs: "h4", md: "h1" },
+            fontSize: { xs: "4rem", md: "7rem" },
+          }}
         >
           Welcome to Notely
         </Typography>
@@ -41,11 +46,9 @@ function HeroSection() {
           fontFamily={"inherit"}
           color="inhert"
           textAlign={"center"}
-          width={700}
+          width={{ xs: "90%", sm: "70%", md: "40%" }}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-          voluptatem qui soluta neque necessitatibus debitis dolore similique
-          numquam ipsam quam.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </Typography>
       </Box>
     </Box>
