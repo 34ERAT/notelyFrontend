@@ -16,7 +16,8 @@ type PatchProfile = {
 function EditProfile() {
   const { profile, setProfile } = useProfileStore();
   const [newProfile, setNewProfile] = useState<PatchProfile>({ ...profile });
-  const { mutate, isPending, isSuccess } = useMutation({
+  const [isSuccess, setisSuccess] = useState(false);
+  const { mutate, isPending } = useMutation({
     mutationKey: ["patchProfile"],
     mutationFn: async (profile: PatchProfile) => {
       const { data } = await axiosInstance.patch("/user", profile);
@@ -24,6 +25,7 @@ function EditProfile() {
     },
     onSuccess: (data) => {
       setProfile(data);
+      setisSuccess(true);
     },
   });
 
@@ -108,7 +110,10 @@ function EditProfile() {
           variant="contained"
           color="primary"
           startIcon={isSuccess && <Check />}
-          onClick={() => mutate(newProfile)}
+          onClick={() => {
+            mutate(newProfile);
+            setTimeout(() => setisSuccess(false), 3000);
+          }}
         >
           Update
         </Button>

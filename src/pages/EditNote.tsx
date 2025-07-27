@@ -12,6 +12,7 @@ type ModifiedNote = CreateNote & {
 function EditNote() {
   const { noteId } = useParams();
   const { setNote } = useEditorStore();
+  console.log("running");
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ["fetchNote"],
     queryFn: async () => {
