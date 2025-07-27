@@ -5,6 +5,7 @@ import { hasEmpty, isEmpty } from "../utils";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosInstance";
 import { Check } from "@mui/icons-material";
+import ImageUpload from "../components/ImageUpload";
 type PatchProfile = {
   firstName: string;
   lastName: string;
@@ -36,10 +37,20 @@ function EditProfile() {
         sx={{ borderRadius: 2, p: 1, overflow: "hidden", width: "40rem" }}
       >
         <Stack>
-          <Stack padding={2}>
+          <Stack
+            padding={2}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+            direction={"row"}
+          >
             <Avatar src={profile.avatar} sx={{ width: 100, height: 100 }}>
               TM
             </Avatar>
+            <ImageUpload
+              onChange={(image: string) => {
+                setProfile({ ...profile, avatar: image });
+              }}
+            />
           </Stack>
           <Stack spacing={3}>
             <Stack direction={"row"} spacing={2}>
