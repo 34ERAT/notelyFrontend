@@ -32,7 +32,7 @@ function ActionButton({
     <Box sx={{ position: "relative" }}>
       <Fab
         sx={buttonSx}
-        size={size || "small"}
+        size={size || "medium"}
         onClick={onClick}
         color="primary"
         disabled={disabled}
@@ -47,7 +47,6 @@ function ActionButton({
             position: "absolute",
             top: -6,
             left: -6,
-            // zIndex: -1,
           }}
         />
       )}

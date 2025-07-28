@@ -29,7 +29,7 @@ function EditNote() {
   if (isLoading) return <Typography> loading please wait ..</Typography>;
   return (
     isSuccess && (
-      <Box height={"85vh"} position={"relative"}>
+      <Box height={"85vh"}>
         <Editor key={data.content} mode="edit" />
       </Box>
     )

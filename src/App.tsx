@@ -15,7 +15,7 @@ import LandingNavBar from "./components/LandingNavBar";
 
 function App() {
   return (
-    <Box height={"100vh"}>
+    <Box height={"90vh"}>
       <Routes>
         <Route element={<LandingNavBar />}>
           <Route path="/" index element={<LandingPage />} />

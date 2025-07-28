@@ -11,7 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import CardRestoreAction from "./CardActions/CardRestoreAction";
 import CardDeleteAction from "./CardActions/CardDeleteAction";
 import CardEditAction from "./CardActions/CardEditAction";
-
+import { yellow } from "@mui/material/colors";
 type Props = {
   id: string;
   title: string;
@@ -38,6 +38,7 @@ function NoteItem({
     <Card
       component={"div"}
       sx={{
+        bgcolor: yellow[100],
         position: "relative",
         width: { xs: 300, md: 300 },
         height: 250,

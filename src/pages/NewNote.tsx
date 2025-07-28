@@ -15,11 +15,7 @@ function NewNote() {
     setNote(emptyNote);
   }, []);
   return (
-    <Box
-      key={note.content == "" ? "" : null}
-      height={"85vh"}
-      position={"relative"}
-    >
+    <Box key={note.content == "" ? "" : null} height={"85vh"}>
       <Editor mode="new" />
     </Box>
   );

@@ -36,7 +36,7 @@ function SaveNoteBtn() {
     },
   });
   return (
-    <Box position={"absolute"} bottom={20} right={10}>
+    <Box position={"fixed"} bottom={20} right={10}>
       <ActionButton
         isloading={isPending}
         isSuccess={success}
