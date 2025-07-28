@@ -29,20 +29,20 @@ function HeroSection() {
       >
         <Typography
           fontFamily={"inherit"}
-          // variant="h1"
-          fontWeight={900}
+          variant="h4"
+          fontWeight={700}
           color="inhert"
           letterSpacing={{ xs: 1, md: 3 }}
           textAlign={"center"}
-          sx={{
-            variant: { xs: "h4", md: "h1" },
-            fontSize: { xs: "4rem", md: "7rem" },
-          }}
+          noWrap
+          sx={{ fontSize: { xs: "2rem", md: "4rem" } }}
+          padding={1}
+          gutterBottom
         >
           Welcome to Notely
         </Typography>
         <Typography
-          variant="h5"
+          variant="subtitle1"
           fontFamily={"inherit"}
           color="inhert"
           textAlign={"center"}

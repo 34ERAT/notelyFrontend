@@ -4,7 +4,7 @@ function AboutUsSection() {
   return (
     <Box
       display={"flex"}
-      height={"100vh"}
+      minHeight={"100vh"}
       justifyContent={"center"}
       alignItems={"center"}
     >
@@ -41,8 +41,10 @@ function AboutUsSection() {
           <Stack
             spacing={2}
             justifyContent={"center"}
+            alignItems={{ xs: "center", md: "start" }}
             height={"100%"}
             padding={3}
+            sx={{ textAlign: { xs: "center", md: "left" } }}
           >
             <Typography
               gutterBottom
@@ -50,11 +52,22 @@ function AboutUsSection() {
               fontWeight={900}
               fontFamily={"inherit"}
               textTransform={"capitalize"}
+              textAlign={"inherit"}
             >
               About us
             </Typography>
-            <Stack justifyContent={"center"} width={"90%"} height={"100%"}>
-              <Typography variant="h3" fontWeight={900} gutterBottom>
+            <Stack
+              pb={2}
+              justifyContent={"center"}
+              width={"90%"}
+              height={"100%"}
+            >
+              <Typography
+                variant="h3"
+                fontWeight={700}
+                fontSize={{ xs: "2rem" }}
+                gutterBottom
+              >
                 We give the best exprience
               </Typography>
               <Typography gutterBottom height={"50%"} variant="body1">
