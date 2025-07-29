@@ -11,12 +11,15 @@ type PatchProfile = {
   lastName: string;
   username: string;
   email: string;
-  avatar: string;
 };
-//TODO: check  change the button color and  give it sume time and return it to normal
 function EditProfile() {
   const { profile, setProfile } = useProfileStore();
-  const [newProfile, setNewProfile] = useState<PatchProfile>({ ...profile });
+  const [newProfile, setNewProfile] = useState<PatchProfile>({
+    firstName: profile.firstName,
+    username: profile.username,
+    lastName: profile.lastName,
+    email: profile.email,
+  });
   const [isSuccess, setisSuccess] = useState(false);
   const { mutate, isPending } = useMutation({
     mutationKey: ["patchProfile"],
@@ -25,8 +28,9 @@ function EditProfile() {
       return data;
     },
     onSuccess: (data) => {
-      setProfile(data);
       setisSuccess(true);
+      setProfile(data);
+      setTimeout(() => setisSuccess(false), 3000);
     },
   });
 
@@ -44,7 +48,7 @@ function EditProfile() {
             direction={"row"}
           >
             <Avatar src={profile.avatar} sx={{ width: 100, height: 100 }}>
-              TM
+              {`${profile.firstName[0]}${profile.lastName[0]}`}
             </Avatar>
             <ImageUpload
               onChange={(image: string) => {
@@ -123,7 +127,6 @@ function EditProfile() {
           startIcon={isSuccess && <CheckCircle />}
           onClick={() => {
             mutate(newProfile);
-            setTimeout(() => setisSuccess(false), 3000);
           }}
         >
           Update
