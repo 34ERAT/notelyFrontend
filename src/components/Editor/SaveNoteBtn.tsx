@@ -7,7 +7,7 @@ import { useState } from "react";
 import axiosInstance from "../../config/axiosInstance";
 import { useEditorStore } from "../../store";
 import type { CreateNote } from "../../types";
-import { hasEmpty, toMarkDown } from "../../utils";
+import { hasEmpty } from "../../utils";
 import ActionButton from "../ActionButton";
 
 //TODO: implement auto  sync
@@ -25,7 +25,6 @@ function SaveNoteBtn() {
     mutationFn: async (note: CreateNote) => {
       const { data } = await axiosInstance.post("/notes", {
         ...note,
-        content: toMarkDown(note.content),
       });
       return data;
     },

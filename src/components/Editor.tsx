@@ -6,17 +6,23 @@ import SaveNoteBtn from "./Editor/SaveNoteBtn";
 import EditNoteBtn from "./Editor/EditNoteBtn";
 import { Box } from "@mui/material";
 import EditorToolbar from "./Editor/EditorToolbar";
+import { useEffect } from "react";
 const extensions = [StarterKit];
 function Editor({ mode }: { mode: "edit" | "new" }) {
   const { note, setNote } = useEditorStore();
   const editor = useEditor({
     extensions,
-    content: note.content || "<P>hello </P>",
+    content: "",
     onUpdate({ editor }) {
       setNote({ ...note, content: editor.getHTML() });
     },
+    onCreate() {
+      console.log(note);
+    },
   });
-
+  useEffect(() => {
+    editor.commands.setContent(note.content);
+  }, [editor, note.content]);
   return (
     <Box>
       <EditorToolbar />

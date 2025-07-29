@@ -5,7 +5,6 @@ import Editor from "../components/Editor";
 import axiosInstance from "../config/axiosInstance";
 import { useParams } from "react-router-dom";
 import { useEditorStore } from "../store";
-import { toHtml } from "../utils";
 import { useEffect, useState } from "react";
 
 type ModifiedNote = CreateNote & {
@@ -28,9 +27,8 @@ function EditNote() {
     (async () => {
       if (isSuccess) {
         const { content, title, synopsis } = data;
-        setNote({ content: await toHtml(content), title, synopsis });
+        setNote({ content, title, synopsis });
         setShowModal(true);
-        console.log(data);
       }
     })();
   }, [data]);
@@ -39,7 +37,7 @@ function EditNote() {
   return (
     showModal && (
       <Box height={"85vh"}>
-        <Editor mode="edit" />
+        <Editor key={noteId} mode="edit" />
       </Box>
     )
   );

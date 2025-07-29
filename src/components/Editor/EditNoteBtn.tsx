@@ -1,6 +1,6 @@
 import { Check, Edit } from "@mui/icons-material";
 import { Box } from "@mui/material";
-import { hasEmpty, toHtml } from "../../utils";
+import { hasEmpty } from "../../utils";
 import ActionButton from "../ActionButton";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
@@ -27,7 +27,8 @@ function EditNoteBtn() {
     onSuccess: (data) => {
       setSuccess(true);
       setNote(data);
-      editor?.commands.setContent(toHtml(data.content));
+      editor?.commands.setContent(note.content);
+      setTimeout(() => setSuccess(false), 3000);
     },
   });
   return (
@@ -39,7 +40,6 @@ function EditNoteBtn() {
         icon={<Edit />}
         onClick={() => {
           mutate(note);
-          setTimeout(() => setSuccess(false), 3000);
         }}
         disabled={hasEmpty(Object.values(note))}
       />

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
 import AllNotes from "./pages/AllNotes";
 import NewNote from "./pages/NewNote";
@@ -16,6 +16,7 @@ import BookMarks from "./pages/BookMarks";
 import ResetPassword from "./pages/ResetPassword";
 
 function App() {
+  const { noteId } = useParams();
   return (
     <Box height={"90vh"}>
       <Routes>
@@ -27,7 +28,10 @@ function App() {
         <Route path="/DashBoard" element={<PrivateRoutes />}>
           <Route element={<DashBoard />}>
             <Route index element={<AllNotes />} />
-            <Route path="EditNote/:noteId" element={<EditNote />} />
+            <Route
+              path="EditNote/:noteId"
+              element={<EditNote key={noteId} />}
+            />
             <Route path="NewNote" element={<NewNote />} />
             <Route path="Bookmark" element={<BookMarks />} />
             <Route path="Trash" element={<Trash />} />
