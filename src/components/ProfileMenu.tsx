@@ -13,6 +13,7 @@ type Props = {
 };
 function ProfileMenu({ onClick, onClose, anchorEl, open }: Props) {
   const { setAccessToken } = useloginStore();
+  const navigate = useNavigate();
   const { mutate: mutateLogout } = useMutation({
     mutationKey: ["logout"],
     mutationFn: async () => {
@@ -20,9 +21,9 @@ function ProfileMenu({ onClick, onClose, anchorEl, open }: Props) {
     },
     onSuccess: () => {
       setAccessToken("");
+      navigate("/");
     },
   });
-  const navigate = useNavigate();
   return (
     <Menu
       id="userProfile"

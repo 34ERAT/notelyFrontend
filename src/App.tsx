@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
@@ -12,6 +12,7 @@ import EditProfile from "./pages/EditProfile";
 import EditNote from "./pages/EditNote";
 import LandingPage from "./pages/LandingPage";
 import LandingNavBar from "./components/LandingNavBar";
+import BookMarks from "./pages/BookMarks";
 
 function App() {
   return (
@@ -27,14 +28,7 @@ function App() {
             <Route index element={<AllNotes />} />
             <Route path="EditNote/:noteId" element={<EditNote />} />
             <Route path="NewNote" element={<NewNote />} />
-            <Route
-              path="Bookmark"
-              element={
-                <Typography textAlign={"center"} variant="h2">
-                  comming soon .....
-                </Typography>
-              }
-            />
+            <Route path="Bookmark" element={<BookMarks />} />
             <Route path="Trash" element={<Trash />} />
             <Route path="profile" element={<EditProfile />} />
           </Route>
