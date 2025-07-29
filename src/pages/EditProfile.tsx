@@ -35,7 +35,13 @@ function EditProfile() {
   });
 
   return (
-    <Box display={"flex"} justifyContent={"center"} padding={1}>
+    <Box
+      display={"flex"}
+      height={"85vh"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      padding={1}
+    >
       <Paper
         elevation={4}
         sx={{ borderRadius: 2, p: 1, overflow: "hidden", width: "40rem" }}
@@ -45,7 +51,8 @@ function EditProfile() {
             padding={2}
             alignItems={"center"}
             justifyContent={"space-between"}
-            direction={"row"}
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 3, sm: 0 }}
           >
             <Avatar src={profile.avatar} sx={{ width: 100, height: 100 }}>
               {`${profile.firstName[0]}${profile.lastName[0]}`.toUpperCase()}
@@ -57,7 +64,10 @@ function EditProfile() {
             />
           </Stack>
           <Stack spacing={3}>
-            <Stack direction={"row"} spacing={2}>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 3, sm: 2 }}
+            >
               <TextField
                 value={newProfile.firstName}
                 fullWidth
@@ -121,7 +131,7 @@ function EditProfile() {
         <Button
           loading={isPending}
           disabled={hasEmpty(Object.values(newProfile))}
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, width: { xs: "100%", sm: "10rem" } }}
           variant="contained"
           color={isSuccess ? "success" : "primary"}
           startIcon={isSuccess && <CheckCircle />}
