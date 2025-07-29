@@ -1,17 +1,11 @@
-import { Bookmark } from "@mui/icons-material";
-import {
-  Card,
-  CardActionArea,
-  IconButton,
-  Stack,
-  Tooltip,
-} from "@mui/material";
+import { Card, CardActionArea, Stack } from "@mui/material";
 import NoteItemContent from "./NoteItemContent";
 import { useQueryClient } from "@tanstack/react-query";
 import CardRestoreAction from "./CardActions/CardRestoreAction";
 import CardDeleteAction from "./CardActions/CardDeleteAction";
 import CardEditAction from "./CardActions/CardEditAction";
 import { green, yellow } from "@mui/material/colors";
+import CardActionBookMark from "./CardActions/CardActionBookMark";
 type Props = {
   id: string;
   title: string;
@@ -77,20 +71,11 @@ function NoteItem({
       {!isdeleted && (
         <Stack>
           <CardEditAction id={id} />
-          <IconButton
-            className="more"
-            sx={{
-              color: BookMarked ? green[600] : "primary.main",
-              position: "absolute",
-              display: "none",
-              top: 40,
-              right: 0,
-            }}
-          >
-            <Tooltip title="Bookmark">
-              <Bookmark />
-            </Tooltip>
-          </IconButton>
+          <CardActionBookMark
+            onSuccess={onSuccess}
+            bookMarked={BookMarked}
+            id={id}
+          />
         </Stack>
       )}
     </Card>

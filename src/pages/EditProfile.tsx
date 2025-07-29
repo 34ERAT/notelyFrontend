@@ -4,7 +4,7 @@ import { useState } from "react";
 import { hasEmpty, isEmpty } from "../utils";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosInstance";
-import { Check } from "@mui/icons-material";
+import { CheckCircle } from "@mui/icons-material";
 import ImageUpload from "../components/ImageUpload";
 type PatchProfile = {
   firstName: string;
@@ -119,8 +119,8 @@ function EditProfile() {
           disabled={hasEmpty(Object.values(newProfile))}
           sx={{ mt: 2 }}
           variant="contained"
-          color="primary"
-          startIcon={isSuccess && <Check />}
+          color={isSuccess ? "success" : "primary"}
+          startIcon={isSuccess && <CheckCircle />}
           onClick={() => {
             mutate(newProfile);
             setTimeout(() => setisSuccess(false), 3000);
