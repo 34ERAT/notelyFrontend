@@ -25,14 +25,12 @@ function Trash() {
           You have nothing in trash !!
         </Typography>
       )}
-      {data?.map(({ id, title, synopsis, dateCreated, lastUpdate }) => {
+      {data?.map(({ id, dateCreated, lastUpdate, ...rest }) => {
         return (
           <NoteItem
             key={id}
             id={id}
-            isdeleted={true}
-            title={title}
-            synopsis={synopsis}
+            {...rest}
             dateCreated={new Date(dateCreated)}
             lastUpdate={new Date(lastUpdate)}
           />
