@@ -19,7 +19,7 @@ function NavBar({ toggleDrawer }: Props) {
         <Logo />
       </Box>
       <IconButton
-        sx={{ display: { xs: "flex", sm: "none" } }}
+        sx={{ display: { xs: "block", sm: "none" } }}
         onClick={toggleDrawer}
       >
         <Menu fontSize="large" />
