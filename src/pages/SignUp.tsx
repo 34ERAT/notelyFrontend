@@ -6,6 +6,7 @@ import {
   TextField,
   Button,
   Alert,
+  Toolbar,
 } from "@mui/material";
 import { useState } from "react";
 import { hasEmpty, isEmpty } from "../utils";
@@ -49,104 +50,111 @@ function SignUp() {
     },
   });
   return (
-    <Box
-      height={"100%"}
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Paper elevation={5} sx={{ p: 2, width: "26rem" }}>
-        {isError && <Alert severity={"error"}>{errorMessage}</Alert>}
-        <Stack spacing={2}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            textAlign={"center"}
-            fontWeight={800}
-          >
-            register
-          </Typography>
-          <Stack spacing={1}>
-            <Stack direction={"row"} spacing={1}>
+    <>
+      <Toolbar />
+      <Box
+        height={"100%"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Paper elevation={5} sx={{ p: 2, width: "26rem" }}>
+          {isError && <Alert severity={"error"}>{errorMessage}</Alert>}
+          <Stack spacing={2}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              textAlign={"center"}
+              fontWeight={800}
+            >
+              register
+            </Typography>
+            <Stack spacing={1}>
+              <Stack direction={"row"} spacing={1}>
+                <TextField
+                  value={input.firstName}
+                  error={isEmpty(input.firstName)}
+                  onChange={({ target: { value } }) =>
+                    setInput({ ...input, firstName: value })
+                  }
+                  label="first Name"
+                  required
+                  fullWidth
+                />
+                <TextField
+                  value={input.lastName}
+                  error={isEmpty(input.lastName)}
+                  onChange={({ target: { value } }) =>
+                    setInput({ ...input, lastName: value })
+                  }
+                  label="last Name"
+                  required
+                  fullWidth
+                />
+              </Stack>
               <TextField
-                value={input.firstName}
-                error={isEmpty(input.firstName)}
+                value={input.username}
+                error={isEmpty(input.username)}
                 onChange={({ target: { value } }) =>
-                  setInput({ ...input, firstName: value })
+                  setInput({ ...input, username: value })
                 }
-                label="first Name"
+                label="userName"
                 required
-                fullWidth
               />
               <TextField
-                value={input.lastName}
-                error={isEmpty(input.lastName)}
+                value={input.email}
+                error={isEmpty(input.email)}
                 onChange={({ target: { value } }) =>
-                  setInput({ ...input, lastName: value })
+                  setInput({ ...input, email: value })
                 }
-                label="last Name"
+                label="email"
+                type="email"
                 required
-                fullWidth
+              />
+              <TextField
+                value={input.password}
+                error={isEmpty(input.password)}
+                onChange={({ target: { value } }) =>
+                  setInput({ ...input, password: value })
+                }
+                label="password"
+                type="password"
+                required
+              />
+              <TextField
+                value={input.confirmPassword}
+                error={input.confirmPassword != input.password}
+                onChange={({ target: { value } }) =>
+                  setInput({ ...input, confirmPassword: value })
+                }
+                label="confrimPassword"
+                type="password"
+                required
               />
             </Stack>
-            <TextField
-              value={input.username}
-              error={isEmpty(input.username)}
-              onChange={({ target: { value } }) =>
-                setInput({ ...input, username: value })
+            <Button
+              disabled={
+                hasEmpty(Object.values(input)) ||
+                input.confirmPassword != input.password
               }
-              label="userName"
-              required
-            />
-            <TextField
-              value={input.email}
-              error={isEmpty(input.email)}
-              onChange={({ target: { value } }) =>
-                setInput({ ...input, email: value })
-              }
-              label="email"
-              type="email"
-              required
-            />
-            <TextField
-              value={input.password}
-              error={isEmpty(input.password)}
-              onChange={({ target: { value } }) =>
-                setInput({ ...input, password: value })
-              }
-              label="password"
-              type="password"
-              required
-            />
-            <TextField
-              value={input.confirmPassword}
-              error={input.confirmPassword != input.password}
-              onChange={({ target: { value } }) =>
-                setInput({ ...input, confirmPassword: value })
-              }
-              label="confrimPassword"
-              type="password"
-              required
-            />
+              loading={isPending}
+              onClick={() => mutate(input)}
+              variant="contained"
+            >
+              Create account
+            </Button>
           </Stack>
+          click to
           <Button
-            disabled={
-              hasEmpty(Object.values(input)) ||
-              input.confirmPassword != input.password
-            }
-            loading={isPending}
-            onClick={() => mutate(input)}
-            variant="contained"
+            onClick={() => navigate("/login")}
+            size="small"
+            variant="text"
           >
-            Create account
+            sign in
           </Button>
-        </Stack>
-        click to
-        <Button onClick={() => navigate("/login")} size="small" variant="text">
-          sign in
-        </Button>
-      </Paper>
-    </Box>
+        </Paper>
+      </Box>
+    </>
   );
 }
 
