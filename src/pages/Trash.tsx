@@ -31,6 +31,7 @@ function Trash() {
             key={id}
             id={id}
             {...rest}
+            isdeleted
             dateCreated={new Date(dateCreated)}
             lastUpdate={new Date(lastUpdate)}
           />

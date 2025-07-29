@@ -66,17 +66,17 @@ function NoteItem({
       {isdeleted ? (
         <CardRestoreAction id={id} onSuccess={onSuccess} />
       ) : (
-        <CardDeleteAction id={id} onSuccess={onSuccess} />
-      )}
-      {!isdeleted && (
-        <Stack>
-          <CardEditAction id={id} />
-          <CardActionBookMark
-            onSuccess={onSuccess}
-            bookMarked={BookMarked}
-            id={id}
-          />
-        </Stack>
+        <>
+          <CardDeleteAction id={id} onSuccess={onSuccess} />
+          <Stack>
+            <CardEditAction id={id} />
+            <CardActionBookMark
+              onSuccess={onSuccess}
+              bookMarked={BookMarked}
+              id={id}
+            />
+          </Stack>
+        </>
       )}
     </Card>
   );

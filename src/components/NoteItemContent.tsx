@@ -20,38 +20,36 @@ function NoteItemContent({ title, synopsis, dateCreated, lastUpdate }: Props) {
       <Typography
         gutterBottom
         fontFamily={"inherit"}
-        variant="h4"
+        variant="h5"
         fontWeight={900}
       >
         {title}
       </Typography>
-      <Typography gutterBottom variant="h6" fontFamily={"inherit"}>
+      <Typography gutterBottom variant="subtitle1" fontFamily={"inherit"}>
         {synopsis}
       </Typography>
       <Stack direction={"row"} justifyContent={"space-between"}>
         <Stack>
           <Typography
             fontFamily={"inherit"}
-            variant="subtitle1"
+            variant="subtitle2"
             textTransform={"capitalize"}
-            gutterBottom
           >
             created at
           </Typography>
-          <Typography color="secondary" fontWeight={900} variant="body2">
+          <Typography color="secondary" fontWeight={500} variant="body2">
             {dateCreated.toDateString()}
           </Typography>
         </Stack>
         <Stack>
           <Typography
             fontFamily={"inherit"}
-            variant="subtitle1"
+            variant="subtitle2"
             textTransform={"capitalize"}
-            gutterBottom
           >
             last Update
           </Typography>
-          <Typography color="info" fontWeight={900} variant="body2">
+          <Typography color="info" fontWeight={500} variant="body2">
             {lastUpdate.toDateString()}
           </Typography>
         </Stack>
