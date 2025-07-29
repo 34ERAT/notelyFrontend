@@ -1,17 +1,11 @@
-import { Bookmark } from "@mui/icons-material";
-import {
-  Card,
-  CardActionArea,
-  IconButton,
-  Stack,
-  Tooltip,
-} from "@mui/material";
+import { Card, CardActionArea, Stack } from "@mui/material";
 import NoteItemContent from "./NoteItemContent";
 import { useQueryClient } from "@tanstack/react-query";
 import CardRestoreAction from "./CardActions/CardRestoreAction";
 import CardDeleteAction from "./CardActions/CardDeleteAction";
 import CardEditAction from "./CardActions/CardEditAction";
-import { yellow } from "@mui/material/colors";
+import { green, yellow } from "@mui/material/colors";
+import CardActionBookMark from "./CardActions/CardActionBookMark";
 type Props = {
   id: string;
   title: string;
@@ -19,6 +13,7 @@ type Props = {
   dateCreated: Date;
   lastUpdate: Date;
   isdeleted?: boolean;
+  BookMarked: boolean;
 };
 function NoteItem({
   id,
@@ -27,10 +22,12 @@ function NoteItem({
   synopsis,
   dateCreated,
   lastUpdate,
+  BookMarked,
 }: Props) {
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["getAllNotes"] });
     queryClient.invalidateQueries({ queryKey: ["getTrash"] });
+    queryClient.invalidateQueries({ queryKey: ["getBookMarks"] });
   };
 
   const queryClient = useQueryClient();
@@ -38,7 +35,7 @@ function NoteItem({
     <Card
       component={"div"}
       sx={{
-        bgcolor: yellow[100],
+        bgcolor: BookMarked ? green[100] : yellow[100],
         position: "relative",
         width: { xs: 300, md: 300 },
         height: 250,
@@ -74,15 +71,11 @@ function NoteItem({
       {!isdeleted && (
         <Stack>
           <CardEditAction id={id} />
-          <IconButton
-            className="more"
-            color="secondary"
-            sx={{ position: "absolute", display: "none", top: 40, right: 0 }}
-          >
-            <Tooltip title="Bookmark">
-              <Bookmark />
-            </Tooltip>
-          </IconButton>
+          <CardActionBookMark
+            onSuccess={onSuccess}
+            bookMarked={BookMarked}
+            id={id}
+          />
         </Stack>
       )}
     </Card>

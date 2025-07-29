@@ -5,6 +5,7 @@ import Editor from "../components/Editor";
 import axiosInstance from "../config/axiosInstance";
 import { useParams } from "react-router-dom";
 import { useEditorStore } from "../store";
+import { toHtml } from "../utils";
 
 type ModifiedNote = CreateNote & {
   content: string;
@@ -12,8 +13,7 @@ type ModifiedNote = CreateNote & {
 function EditNote() {
   const { noteId } = useParams();
   const { setNote } = useEditorStore();
-  console.log("running");
-  const { data, isSuccess, isLoading } = useQuery({
+  const { isSuccess, isLoading } = useQuery({
     queryKey: ["fetchNote"],
     queryFn: async () => {
       const { data } = await axiosInstance.get<ModifiedNote>(
@@ -21,18 +21,16 @@ function EditNote() {
       );
       if (isSuccess) {
         const { content, title, synopsis } = data;
-        setNote({ content, title, synopsis });
+        setNote({ content: await toHtml(content), title, synopsis });
       }
       return data;
     },
   });
   if (isLoading) return <Typography> loading please wait ..</Typography>;
   return (
-    isSuccess && (
-      <Box height={"85vh"}>
-        <Editor key={data.content} mode="edit" />
-      </Box>
-    )
+    <Box height={"85vh"}>
+      <Editor mode="edit" />
+    </Box>
   );
 }
 

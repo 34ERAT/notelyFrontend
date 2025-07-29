@@ -1,13 +1,15 @@
-import { Restore } from "@mui/icons-material";
+import { CheckCircle, Restore } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../config/axiosInstance";
+import { useState } from "react";
 
 type Props = {
   id: string;
-  onSuccess?: () => void;
+  onSuccess: () => void;
 };
 function CardRestoreAction({ id, onSuccess }: Props) {
+  const [isSuccess, setIsSuccess] = useState(false);
   const { mutate: mutateRestoreNote } = useMutation({
     mutationKey: ["restoreNote"],
     mutationFn: async (id: string) => {
@@ -16,7 +18,11 @@ function CardRestoreAction({ id, onSuccess }: Props) {
       );
       return data;
     },
-    onSuccess: onSuccess,
+    onSuccess: () => {
+      setIsSuccess(true);
+      onSuccess();
+      setTimeout(() => setIsSuccess(false), 3000);
+    },
   });
   return (
     <IconButton
@@ -26,7 +32,7 @@ function CardRestoreAction({ id, onSuccess }: Props) {
       sx={{ position: "absolute", display: "none", top: 0, right: 0 }}
     >
       <Tooltip title="Restore">
-        <Restore />
+        {isSuccess ? <CheckCircle color={"success"} /> : <Restore />}
       </Tooltip>
     </IconButton>
   );

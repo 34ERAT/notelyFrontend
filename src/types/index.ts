@@ -9,6 +9,7 @@ export type NoteListItem = {
   synopsis: string;
   dateCreated: string;
   lastUpdate: string;
+  BookMarked: boolean;
 };
 export type UserProfile = {
   firstName: string;

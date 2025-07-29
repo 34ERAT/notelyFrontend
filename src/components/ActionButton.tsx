@@ -32,7 +32,7 @@ function ActionButton({
     <Box sx={{ position: "relative" }}>
       <Fab
         sx={buttonSx}
-        size={size || "medium"}
+        size={size || "large"}
         onClick={onClick}
         color="primary"
         disabled={disabled}

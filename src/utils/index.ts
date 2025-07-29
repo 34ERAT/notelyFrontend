@@ -16,6 +16,6 @@ export function toMarkDown(value: string) {
 
   return turndownService.turndown(value);
 }
-export function toHtml(value: string) {
-  return marked(value);
+export async function toHtml(value: string) {
+  return await marked(value);
 }
