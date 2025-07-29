@@ -17,9 +17,6 @@ function Editor({ mode }: { mode: "edit" | "new" }) {
     onUpdate({ editor }) {
       setNote({ ...note, content: editor.getHTML() });
     },
-    onCreate() {
-      console.log(note);
-    },
   });
   useEffect(() => {
     editor.commands.setContent(initalContent);

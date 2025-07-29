@@ -1,23 +1,22 @@
 import { Box } from "@mui/material";
-import { useEffect } from "react";
-import type { CreateNote } from "../types";
+import { useEffect, useState } from "react";
 import { useNoteStore } from "../store";
 import Editor from "../components/Editor";
 //TODO: implement auto  sync
 function NewNote() {
-  const emptyNote: CreateNote = {
-    title: "",
-    content: "",
-    synopsis: "",
-  };
-  const { note, setNote } = useNoteStore();
+  const [showModal, setShowModal] = useState(false);
+  const { initalContent, setNote, setInitialContent } = useNoteStore();
   useEffect(() => {
-    setNote(emptyNote);
-  }, []);
+    setInitialContent("");
+    setNote({ title: "", content: "", synopsis: "" });
+    setShowModal(true);
+  }, [initalContent]);
   return (
-    <Box key={note.content == "" ? "" : null} height={"85vh"}>
-      <Editor mode="new" />
-    </Box>
+    showModal && (
+      <Box height={"85vh"}>
+        <Editor mode="new" />
+      </Box>
+    )
   );
 }
 
