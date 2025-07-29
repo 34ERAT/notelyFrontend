@@ -23,18 +23,21 @@ function AllNotes() {
           you don't have any notes yet !! <NoteAddTwoTone />
         </Typography>
       )}
-      {data?.map(({ id, title, synopsis, dateCreated, lastUpdate }) => {
-        return (
-          <NoteItem
-            key={id}
-            id={id}
-            title={title}
-            synopsis={synopsis}
-            dateCreated={new Date(dateCreated)}
-            lastUpdate={new Date(lastUpdate)}
-          />
-        );
-      })}
+      {data?.map(
+        ({ id, title, BookMarked, synopsis, dateCreated, lastUpdate }) => {
+          return (
+            <NoteItem
+              key={id}
+              BookMarked={BookMarked}
+              id={id}
+              title={title}
+              synopsis={synopsis}
+              dateCreated={new Date(dateCreated)}
+              lastUpdate={new Date(lastUpdate)}
+            />
+          );
+        },
+      )}
     </Box>
   );
 }

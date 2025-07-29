@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function CardEditAction({ id }: { id: string }) {
   const navigate = useNavigate();
+
   return (
     <IconButton
       className="more"
@@ -11,7 +12,7 @@ function CardEditAction({ id }: { id: string }) {
       sx={{ position: "absolute", display: "none", top: 70, right: 0 }}
       onClick={() => navigate(`EditNote/${id}`)}
     >
-      <Tooltip title="Bookmark">
+      <Tooltip title="Edit note">
         <Edit />
       </Tooltip>
     </IconButton>
