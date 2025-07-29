@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
 import type { CreateNote } from "../types";
-import { useEditorStore } from "../store";
+import { useNoteStore } from "../store";
 import Editor from "../components/Editor";
 //TODO: implement auto  sync
 function NewNote() {
@@ -10,7 +10,7 @@ function NewNote() {
     content: "",
     synopsis: "",
   };
-  const { note, setNote } = useEditorStore();
+  const { note, setNote } = useNoteStore();
   useEffect(() => {
     setNote(emptyNote);
   }, []);

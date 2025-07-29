@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useCurrentEditor } from "@tiptap/react";
 import { useState } from "react";
 import axiosInstance from "../../config/axiosInstance";
-import { useEditorStore } from "../../store";
+import { useNoteStore } from "../../store";
 import type { CreateNote } from "../../types";
 import { hasEmpty } from "../../utils";
 import ActionButton from "../ActionButton";
@@ -18,7 +18,7 @@ function SaveNoteBtn() {
     synopsis: "",
   };
   const { editor } = useCurrentEditor();
-  const { note, setNote } = useEditorStore();
+  const { note, setNote } = useNoteStore();
   const [success, setSuccess] = useState(false);
   const { mutate, isPending } = useMutation({
     mutationKey: ["newNote"],

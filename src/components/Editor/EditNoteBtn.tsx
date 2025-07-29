@@ -6,14 +6,14 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import axiosInstance from "../../config/axiosInstance";
 import type { CreateNote } from "../../types";
-import { useEditorStore } from "../../store";
+import { useNoteStore } from "../../store";
 import { useParams } from "react-router-dom";
 import { useCurrentEditor } from "@tiptap/react";
 
 function EditNoteBtn() {
   const [success, setSuccess] = useState(false);
   const { noteId } = useParams();
-  const { note, setNote } = useEditorStore();
+  const { note, setNote } = useNoteStore();
   const { editor } = useCurrentEditor();
   const { mutate, isPending } = useMutation({
     mutationKey: ["updateNote"],

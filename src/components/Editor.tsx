@@ -1,4 +1,4 @@
-import { useEditorStore } from "../store";
+import { useNoteStore } from "../store";
 import { EditorContent, useEditor } from "@tiptap/react";
 import "./TipTap.scss";
 import StarterKit from "@tiptap/starter-kit";
@@ -9,7 +9,8 @@ import EditorToolbar from "./Editor/EditorToolbar";
 import { useEffect } from "react";
 const extensions = [StarterKit];
 function Editor({ mode }: { mode: "edit" | "new" }) {
-  const { note, setNote } = useEditorStore();
+  const { note, setNote } = useNoteStore();
+  const { initalContent } = useNoteStore();
   const editor = useEditor({
     extensions,
     content: "",
@@ -21,8 +22,8 @@ function Editor({ mode }: { mode: "edit" | "new" }) {
     },
   });
   useEffect(() => {
-    editor.commands.setContent(note.content);
-  }, [editor, note.content]);
+    editor.commands.setContent(initalContent);
+  }, [editor, initalContent]);
   return (
     <Box>
       <EditorToolbar />

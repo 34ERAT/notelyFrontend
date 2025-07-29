@@ -1,9 +1,9 @@
 import { Stack, TextField } from "@mui/material";
 import { isEmpty } from "../../utils";
-import { useEditorStore } from "../../store";
+import { useNoteStore } from "../../store";
 
 function EditorToolbar() {
-  const { note, setNote } = useEditorStore();
+  const { note, setNote } = useNoteStore();
   return (
     <Stack mb={2} direction={{ xs: "column", md: "row" }} spacing={1}>
       <TextField

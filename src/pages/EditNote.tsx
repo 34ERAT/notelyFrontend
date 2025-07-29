@@ -4,7 +4,7 @@ import type { CreateNote } from "../types";
 import Editor from "../components/Editor";
 import axiosInstance from "../config/axiosInstance";
 import { useParams } from "react-router-dom";
-import { useEditorStore } from "../store";
+import { useNoteStore } from "../store";
 import { useEffect, useState } from "react";
 
 type ModifiedNote = CreateNote & {
@@ -12,7 +12,7 @@ type ModifiedNote = CreateNote & {
 };
 function EditNote() {
   const { noteId } = useParams();
-  const { setNote } = useEditorStore();
+  const { setNote, setInitialContent } = useNoteStore();
   const [showModal, setShowModal] = useState(false);
   const { data, isSuccess, isFetching } = useQuery({
     queryKey: ["fetchNote"],
@@ -28,6 +28,7 @@ function EditNote() {
       if (isSuccess) {
         const { content, title, synopsis } = data;
         setNote({ content, title, synopsis });
+        setInitialContent(content);
         setShowModal(true);
       }
     })();

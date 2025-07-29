@@ -28,12 +28,12 @@ export const useProfileStore = create<ProfileState>((set) => ({
 type useSelectedNote = {
   note: CreateNote;
   setNote: (note: CreateNote) => void;
-  reSet: () => void;
+  initalContent: string;
+  setInitialContent: (content: string) => void;
 };
-export const useEditorStore = create<useSelectedNote>((set) => ({
+export const useNoteStore = create<useSelectedNote>((set) => ({
   note: { title: "", synopsis: "", content: "" },
   setNote: (note: CreateNote) => set({ note }),
-  reSet: () => {
-    set({ note: { title: "", content: "", synopsis: "" } });
-  },
+  initalContent: "",
+  setInitialContent: (content: string) => set({ initalContent: content }),
 }));

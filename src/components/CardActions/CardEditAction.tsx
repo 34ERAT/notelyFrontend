@@ -2,12 +2,12 @@ import { Edit } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useEditorStore } from "../../store";
+import { useNoteStore } from "../../store";
 
 function CardEditAction({ id }: { id: string }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { setNote } = useEditorStore();
+  const { setNote } = useNoteStore();
   return (
     <IconButton
       className="more"
