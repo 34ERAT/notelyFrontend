@@ -17,7 +17,7 @@ import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
-    <Box minHeight={"100vh"}>
+    <Box p={0}>
       <Routes>
         <Route element={<LandingNavBar />}>
           <Route path="/" index element={<LandingPage />} />

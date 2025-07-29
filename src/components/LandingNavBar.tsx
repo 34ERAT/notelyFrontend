@@ -1,4 +1,4 @@
-import { AppBar, Button, Stack, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, Stack, Toolbar } from "@mui/material";
 import Logo from "./Logo";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useloginStore } from "../store";
@@ -8,8 +8,8 @@ function LandingNavBar() {
   const navigate = useNavigate();
   const { accessToken } = useloginStore();
   return (
-    <>
-      <AppBar sx={{}} position="fixed">
+    <Box>
+      <AppBar position="fixed">
         <Toolbar>
           <Stack
             direction={"row"}
@@ -39,8 +39,11 @@ function LandingNavBar() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Outlet />
-    </>
+      <Toolbar />
+      <Box component={"div"} height={"90vh"} width={"100%"}>
+        <Outlet />
+      </Box>
+    </Box>
   );
 }
 
