@@ -13,6 +13,7 @@ import EditNote from "./pages/EditNote";
 import LandingPage from "./pages/LandingPage";
 import LandingNavBar from "./components/LandingNavBar";
 import BookMarks from "./pages/BookMarks";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
             <Route path="NewNote" element={<NewNote />} />
             <Route path="Bookmark" element={<BookMarks />} />
             <Route path="Trash" element={<Trash />} />
-            <Route path="profile" element={<EditProfile />} />
+            <Route path="Profile" element={<EditProfile />} />
+            <Route path="Password" element={<ResetPassword />} />
           </Route>
         </Route>
       </Routes>
