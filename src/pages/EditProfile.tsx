@@ -48,7 +48,7 @@ function EditProfile() {
             direction={"row"}
           >
             <Avatar src={profile.avatar} sx={{ width: 100, height: 100 }}>
-              {`${profile.firstName[0]}${profile.lastName[0]}`}
+              {`${profile.firstName[0]}${profile.lastName[0]}`.toUpperCase()}
             </Avatar>
             <ImageUpload
               onChange={(image: string) => {

@@ -1,5 +1,11 @@
 import { Logout, Password } from "@mui/icons-material";
-import { MenuItem, Menu, Avatar, ListItemIcon } from "@mui/material";
+import {
+  MenuItem,
+  Menu,
+  Avatar,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosInstance";
 import { useloginStore, useProfileStore } from "../store";
@@ -65,11 +71,14 @@ function ProfileMenu({ onClick, onClose, anchorEl, open }: Props) {
         <Avatar src={profile.avatar} sx={{ mr: 1 }} /> Profile
       </MenuItem>
 
-      <MenuItem onClick={() => navigate("/DashBoard/Password")}>
+      <MenuItem
+        sx={{ color: "primary.error" }}
+        onClick={() => navigate("/DashBoard/Password")}
+      >
         <ListItemIcon>
-          <Password />
+          <Password color="error" />
         </ListItemIcon>
-        password
+        <Typography color="error">password</Typography>
       </MenuItem>
       <MenuItem onClick={() => mutateLogout()}>
         <ListItemIcon>

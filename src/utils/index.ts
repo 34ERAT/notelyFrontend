@@ -3,7 +3,6 @@ import TurndownService from "turndown";
 import { marked } from "marked";
 
 export function hasEmpty(values: string[]) {
-  console.log(values);
   for (const item of values) {
     if (item.length == 0) return true;
   }
