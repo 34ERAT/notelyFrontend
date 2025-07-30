@@ -20,7 +20,7 @@ function NoteItemContent({ title, synopsis, dateCreated, lastUpdate }: Props) {
       <Typography
         gutterBottom
         fontFamily={"inherit"}
-        variant="h5"
+        variant="h4"
         fontWeight={900}
       >
         {title}
