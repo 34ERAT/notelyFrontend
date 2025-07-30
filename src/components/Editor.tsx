@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import EditorToolbar from "./Editor/EditorToolbar";
 import { useEffect } from "react";
 import BubbleMenu from "./Editor/BubbleMenu";
+import FloatingMenu from "./Editor/FloatingMenu";
 const extensions = [
   StarterKit,
   Placeholder.configure({
@@ -23,7 +24,6 @@ function Editor({ mode }: { mode: "edit" | "new" }) {
     content: "",
     onUpdate({ editor }) {
       setNote({ ...note, content: editor.getHTML() });
-      console.log(editor.getHTML());
     },
   });
   useEffect(() => {
@@ -32,7 +32,7 @@ function Editor({ mode }: { mode: "edit" | "new" }) {
   return (
     <Box>
       <EditorToolbar />
-      {/* <FloatingMenu editor={editor} /> */}
+      <FloatingMenu editor={editor} />
       <BubbleMenu editor={editor} />
       <EditorContent editor={editor} />
       {mode == "new" ? <SaveNoteBtn /> : <EditNoteBtn />}

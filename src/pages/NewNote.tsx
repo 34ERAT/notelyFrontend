@@ -5,12 +5,12 @@ import Editor from "../components/Editor";
 //TODO: implement auto  sync
 function NewNote() {
   const [showModal, setShowModal] = useState(false);
-  const { initalContent, setNote, setInitialContent } = useNoteStore();
+  const { setNote, setInitialContent } = useNoteStore();
   useEffect(() => {
     setInitialContent("");
     setNote({ title: "", content: "", synopsis: "" });
     setShowModal(true);
-  }, [initalContent]);
+  }, []);
   return (
     showModal && (
       <Box height={"85vh"}>
