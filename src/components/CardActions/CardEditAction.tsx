@@ -16,7 +16,7 @@ function CardEditAction({ id }: { id: string }) {
       onClick={() => {
         queryClient.invalidateQueries({ queryKey: ["fetchNote"] });
         setNote({ title: "", content: "", synopsis: "" });
-        navigate(`EditNote/${id}`);
+        navigate(`/DashBoard/EditNote/${id}`);
       }}
     >
       <Tooltip title="Edit note">

@@ -2,7 +2,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-import { useCurrentEditor } from "@tiptap/react";
 import { useState } from "react";
 import axiosInstance from "../../config/axiosInstance";
 import { useNoteStore } from "../../store";
@@ -17,8 +16,7 @@ function SaveNoteBtn() {
     content: "",
     synopsis: "",
   };
-  const { editor } = useCurrentEditor();
-  const { note, setNote } = useNoteStore();
+  const { note, setInitialContent, setNote } = useNoteStore();
   const [success, setSuccess] = useState(false);
   const { mutate, isPending } = useMutation({
     mutationKey: ["newNote"],
@@ -29,8 +27,7 @@ function SaveNoteBtn() {
       return data;
     },
     onSuccess() {
-      console.log("i have run ");
-      editor?.commands.setContent("");
+      setInitialContent("");
       setNote(emptyNote);
     },
   });
