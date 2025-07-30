@@ -7,6 +7,8 @@ import EditNoteBtn from "./Editor/EditNoteBtn";
 import { Box } from "@mui/material";
 import EditorToolbar from "./Editor/EditorToolbar";
 import { useEffect } from "react";
+import BubbleMenu from "./Editor/BubbleMenu";
+import FloatingMenu from "./Editor/FloatingMenu";
 const extensions = [StarterKit];
 function Editor({ mode }: { mode: "edit" | "new" }) {
   const { note, setNote } = useNoteStore();
@@ -24,6 +26,8 @@ function Editor({ mode }: { mode: "edit" | "new" }) {
   return (
     <Box>
       <EditorToolbar />
+      <FloatingMenu editor={editor} />
+      <BubbleMenu editor={editor} />
       <EditorContent editor={editor} />
       {mode == "new" ? <SaveNoteBtn /> : <EditNoteBtn />}
     </Box>

@@ -22,6 +22,7 @@ function NoteItemContent({ title, synopsis, dateCreated, lastUpdate }: Props) {
         fontFamily={"inherit"}
         variant="h4"
         fontWeight={900}
+        textTransform={"capitalize"}
       >
         {title}
       </Typography>
