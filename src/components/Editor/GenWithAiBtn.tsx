@@ -4,6 +4,7 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import axiosInstance from "../../config/axiosInstance";
 import { useNoteStore } from "../../store";
 import { hasEmpty } from "../../utils";
+import { CircularProgress } from "@mui/material";
 type NoteHeader = {
   synopsis: string;
   title: string;
@@ -28,10 +29,19 @@ function GenWithAiBtn() {
   });
   return (
     <button
+      className={isPending ? "loading" : ""}
       disabled={hasEmpty([note.title, note.synopsis]) || isPending}
       onClick={() => mutate({ title: note.title, synopsis: note.synopsis })}
     >
-      <AutoAwesomeIcon />
+      {isPending ? (
+        <CircularProgress
+          size={16}
+          thickness={5}
+          style={{ color: "var(--purple)" }}
+        />
+      ) : (
+        <AutoAwesomeIcon />
+      )}
     </button>
   );
 }
