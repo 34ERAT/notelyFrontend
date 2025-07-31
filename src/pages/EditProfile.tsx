@@ -42,10 +42,7 @@ function EditProfile() {
       alignItems={"center"}
       padding={1}
     >
-      <Paper
-        elevation={4}
-        sx={{ borderRadius: 2, p: 1, overflow: "hidden", width: "40rem" }}
-      >
+      <Paper elevation={4} sx={{ borderRadius: 2, p: 1, overflow: "hidden" }}>
         <Stack>
           <Stack
             padding={2}

@@ -4,6 +4,8 @@ import { BubbleMenu as BubbleMenuReact } from "@tiptap/react/menus";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import CodeIcon from "@mui/icons-material/Code";
+import CodeOffIcon from "@mui/icons-material/CodeOff";
 function BubbleMenu({ editor }: { editor: Editor }) {
   const editorState = useEditorState({
     editor,
@@ -12,6 +14,7 @@ function BubbleMenu({ editor }: { editor: Editor }) {
         isBulletList: ctx.editor.isActive("bulletList") ?? false,
         isOrderedList: ctx.editor.isActive("orderedList") ?? false,
         isBlockquote: ctx.editor.isActive("blockquote") ?? false,
+        isCodeBlock: ctx.editor.isActive("codeBlock") ?? false,
       };
     },
   });
@@ -62,6 +65,13 @@ function BubbleMenu({ editor }: { editor: Editor }) {
           className={editorState.isBlockquote ? "is-active" : ""}
         >
           <FormatQuoteIcon />
+        </button>
+
+        <button
+          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+          className={editorState.isCodeBlock ? "is-active" : ""}
+        >
+          {editorState.isCodeBlock ? <CodeIcon /> : <CodeOffIcon />}
         </button>
       </div>
     </BubbleMenuReact>
