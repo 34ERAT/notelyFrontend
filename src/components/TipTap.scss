@@ -13,7 +13,8 @@
 .tiptap {
   flex: 1 1 auto;
   min-height: 75vh;
-  overflow-y: auto;
+  // overflow-y: auto;
+  width: 100%;
   padding: 1rem;
   border: 1px solid #ccc;
   all: unset;
@@ -36,7 +37,6 @@
     }
   }
 
-  /* Heading sty  /* Code and preformatted text styles */
   code {
     background-color: var(--purple-light);
     border-radius: 0.4rem;

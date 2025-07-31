@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import type { CreateNote } from "../types";
 import Editor from "../components/Editor";
@@ -14,7 +14,7 @@ function EditNote() {
   const { noteId } = useParams();
   const { setNote, setInitialContent } = useNoteStore();
   const [showModal, setShowModal] = useState(false);
-  const { data, isSuccess, isFetching } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ["fetchNote"],
     queryFn: async () => {
       const { data } = await axiosInstance.get<ModifiedNote>(
@@ -34,10 +34,9 @@ function EditNote() {
     })();
   }, [data]);
 
-  if (isFetching) return <Typography> loading please wait ..</Typography>;
   return (
     showModal && (
-      <Box height={"85vh"}>
+      <Box height={"85vh"} width={"100%"}>
         <Editor key={noteId} mode="edit" />
       </Box>
     )

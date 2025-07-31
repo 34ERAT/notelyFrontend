@@ -13,7 +13,7 @@ function NewNote() {
   }, []);
   return (
     showModal && (
-      <Box height={"85vh"}>
+      <Box height={"85vh"} width={"100%"}>
         <Editor mode="new" />
       </Box>
     )
