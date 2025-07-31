@@ -41,18 +41,6 @@ function SideBar() {
           </ListItemButton>
         </ListItem>
 
-        {/* <ListItem disablePadding> */}
-        {/*   <ListItemButton */}
-        {/*     onClick={() => navigate("EditNote")} */}
-        {/*     sx={style} */}
-        {/*     disableGutters */}
-        {/*   > */}
-        {/*     <ListItemIcon sx={style}> */}
-        {/*       <Edit color="info" /> */}
-        {/*     </ListItemIcon> */}
-        {/*   </ListItemButton> */}
-        {/* </ListItem> */}
-
         <ListItem disablePadding>
           <ListItemButton
             sx={style}
